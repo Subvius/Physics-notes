@@ -4,8 +4,10 @@ import 'package:physics_notes/constants/colors.dart';
 import 'package:physics_notes/functions/declinationFormatter.dart';
 import 'package:physics_notes/functions/navigateToSubject.dart';
 
-Widget renderSubjectCard(
-    String title, List images, String? url, BuildContext context) {
+Widget renderSubjectCard(String title, List images, String? url,
+    BuildContext context, bool? adminPanel) {
+  adminPanel ??= false;
+
   final int amountOfImages = images.length;
   return Padding(
     padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
@@ -18,6 +20,12 @@ Widget renderSubjectCard(
         side: const BorderSide(width: 2),
         borderRadius: BorderRadius.circular(20),
       ),
+      trailing: !adminPanel ? null : IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.more_vert_rounded,
+            color: Colors.white,
+          )),
       leading: Container(
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black54, width: 1),

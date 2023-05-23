@@ -5,9 +5,12 @@ import 'package:physics_notes/constants/colors.dart';
 import 'package:physics_notes/functions/goToScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:physics_notes/models/subject.dart';
+import 'package:physics_notes/screens/addTest.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, required this.adminMode}) : super(key: key);
+
+  final bool adminMode;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,18 +18,55 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final colors = DarkTheme;
+  late final bool adminMode = widget.adminMode;
+
+  int settingsLastTap = DateTime.now().millisecondsSinceEpoch;
+  int settingsConsecutiveTaps = 0;
+
+  String headerTitle = "";
+
+  @override
+  void initState() {
+    headerTitle = adminMode ? "Admin Mode" : "Физика";
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text(
-          "Физика",
-          style: TextStyle(
-            color: Colors.white,
+        title: GestureDetector(
+          onTap: () {
+            int now = DateTime.now().millisecondsSinceEpoch;
+            if (now - settingsLastTap < 1000) {
+              settingsConsecutiveTaps++;
+              if (settingsConsecutiveTaps > 4) {
+                goToScreenAsReplacement(
+                    HomePage(adminMode: !adminMode), context);
+              }
+            } else {
+              settingsConsecutiveTaps = 0;
+            }
+            settingsLastTap = now;
+          },
+          child: Text(
+            headerTitle,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
+        actions: adminMode
+            ? [
+                IconButton(
+                    onPressed: _addTest,
+                    icon: const Icon(
+                      Icons.add_rounded,
+                      color: Colors.white,
+                    ))
+              ]
+            : null,
         centerTitle: true,
         backgroundColor: colors.header,
       ),
@@ -43,10 +83,18 @@ class _HomePageState extends State<HomePage> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot doc = snapshot.data!.docs[index];
-                  Map docJson = {"name": doc["name"], "images": doc["images"]};
+                  Map docJson = {
+                    "name": doc["name"],
+                    "images": doc["images"],
+                    "docID": doc["docID"]
+                  };
                   Subject subject = Subject.fromJson(docJson);
-                  return renderSubjectCard(subject.title, subject.images,
-                      subject.images.first, context);
+                  return renderSubjectCard(
+                      subject.title,
+                      subject.images,
+                      subject.images.isEmpty ? null : subject.images.first,
+                      context,
+                      adminMode);
                 });
           } else {
             return Container();
@@ -54,5 +102,9 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+
+  _addTest() {
+    goToScreen(AddTestPage(), context);
   }
 }

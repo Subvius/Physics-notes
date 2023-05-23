@@ -5,6 +5,7 @@ class Subject {
   factory Subject.fromJson(Map data) {
     final title = data["name"];
     final List images = data["images"];
+    final String docID = data["docID"];
 
     return Subject(title: title, images: images);
   }
