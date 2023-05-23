@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "382901166205",
+    "project_id": "physics-notes-5b407",
+    "storage_bucket": "physics-notes-5b407.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382901166205:android:cebfe172833260c7d45114",
+        "android_client_info": {
+          "package_name": "com.subvius.physics_notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382901166205-4vbn6naahgt0drnmh96qj43st8f32e8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCmVXwczEjbPUnJoboL615CKIrBKO-5w0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382901166205-4vbn6naahgt0drnmh96qj43st8f32e8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
