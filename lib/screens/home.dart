@@ -86,15 +86,18 @@ class _HomePageState extends State<HomePage> {
                   Map docJson = {
                     "name": doc["name"],
                     "images": doc["images"],
-                    "docID": doc["docID"]
+                    "docID": doc["docID"],
+                    "index": doc["index"]
                   };
                   Subject subject = Subject.fromJson(docJson);
                   return renderSubjectCard(
-                      subject.title,
-                      subject.images,
-                      subject.images.isEmpty ? null : subject.images.first,
-                      context,
-                      adminMode);
+                    subject.title,
+                    subject.images,
+                    subject.images.isEmpty ? null : subject.images.first,
+                    context,
+                    subject,
+                    adminPanel: adminMode,
+                  );
                 });
           } else {
             return Container();
@@ -105,6 +108,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   _addTest() {
-    goToScreen(AddTestPage(), context);
+    goToScreen(const AddTestPage(), context);
   }
 }

@@ -64,13 +64,13 @@ class _AddTestPageState extends State<AddTestPage> {
                       keyboardType: TextInputType.multiline,
                       autofocus: true,
                       maxLines: 1,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.blue.shade300, width: 2)),
                         hintText: "Название",
-                        hintStyle: TextStyle(color: Colors.white24),
+                        hintStyle: const TextStyle(color: Colors.white24),
                       ),
                     ),
                   ),
@@ -95,13 +95,13 @@ class _AddTestPageState extends State<AddTestPage> {
                       keyboardType: TextInputType.number,
                       autofocus: true,
                       maxLines: 1,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.blue.shade300, width: 2)),
                         hintText: "Индекс",
-                        hintStyle: TextStyle(color: Colors.white24),
+                        hintStyle: const TextStyle(color: Colors.white24),
                       ),
                     ),
                   ),
